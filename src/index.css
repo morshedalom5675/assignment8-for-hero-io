@@ -1,2 +1,8 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui"{ themes: light --default}
+
+
+.header.active{
+    color: #9F62F2;
+    border-bottom: 2px solid #9F62F2;
+}

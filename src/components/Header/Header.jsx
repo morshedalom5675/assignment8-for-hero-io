@@ -39,21 +39,21 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-2">
             <img className="h-10 w-10" src="/logo.png" alt="logo" />
-            <NavLink className="text-xl">HERO.io</NavLink>
+            <NavLink className="text-xl text-[#9F62F2]">HERO.IO</NavLink>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <NavLink to="/">Home</NavLink>
+              <NavLink className="header" to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to="/apps">Apps</NavLink>
+              <NavLink className="header" to="/apps">Apps</NavLink>
             </li>
           </ul>
         </div>
         <div className="navbar-end">
-          <NavLink className="btn" to='https://github.com/'><FaGithub />Contribute</NavLink>
+          <NavLink className="btn bg-gradient-to-tl from-[#9F62F2] to-[#632EE3] text-white" to='https://github.com/'><FaGithub />Contribute</NavLink>
         </div>
       </div>
     </div>
