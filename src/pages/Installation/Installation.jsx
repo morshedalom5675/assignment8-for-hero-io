@@ -20,6 +20,13 @@ const Installation = () => {
     }
   }
 
+  const handleRemove = (id) => {
+    const existingList = JSON.parse(localStorage.getItem('install'))
+    let updateRemove = existingList.filter(p => p.id !== id)
+    setInstalled(updateRemove)
+    localStorage.setItem('install',JSON.stringify(updateRemove))
+  }
+
   return (
     <div className="container mx-auto">
       <div className="text-center space-y-6 mt-10">
@@ -43,7 +50,7 @@ const Installation = () => {
               <img
                 className="h-30 w-30 p-2 rounded-xl"
                 src={appSave.image}
-                alt="Movie"
+                alt="App"
               />
             </figure>
             <div className="card-body">
@@ -62,7 +69,7 @@ const Installation = () => {
                 </div>
               </div>
               <div className="card-actions justify-end">
-                <button className="btn btn-primary">Uninstall</button>
+                <button onClick={()=>handleRemove(appSave.id)} className="btn btn-primary">Uninstall</button>
               </div>
             </div>
           </div>

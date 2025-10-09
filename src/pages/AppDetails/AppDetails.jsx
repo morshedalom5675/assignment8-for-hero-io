@@ -1,32 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import downloadImg from "../../assets/icon-downloads.png";
 import ratingImg from "../../assets/icon-ratings.png";
 import likeImg from "../../assets/icon-review.png";
 import { useLoaderData, useParams } from "react-router";
-import { Bar, BarChart, CartesianGrid, Legend, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  Rectangle,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import Swal from "sweetalert2";
 
 const AppDetails = () => {
+  const [disable, setDisable] = useState(false);
   const { id } = useParams();
   const appId = parseInt(id);
   const data = useLoaderData();
-//   console.log(data);
+  //   console.log(data);
   const singleData = data.find((app) => app.id === appId);
-//   console.log(singleData);
+  //   console.log(singleData);
 
-  const handleInstallation = () =>{
-    const existingList = JSON.parse(localStorage.getItem('install'))
+  const handleInstallation = () => {
+    const existingList = JSON.parse(localStorage.getItem("install"));
     // console.log(JSON.parse(existingList))
-    let updated = []
-    if(existingList){
-        const isDuplicate = existingList.some(a=>a.id === singleData.id)
-        if(isDuplicate)return alert('sorry')
-        updated = [...existingList,singleData]
+    let updated = [];
+    if (existingList) {
+      const isDuplicate = existingList.some((a) => a.id === singleData.id);
+      if (isDuplicate) return;
+      setDisable(true);
+      updated = [...existingList, singleData];
+      let timerInterval;
+      Swal.fire({
+        title: "App Installing....",
+        html: "Please Wait A few <b></b> Seconds.",
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading();
+          const timer = Swal.getPopup().querySelector("b");
+          timerInterval = setInterval(() => {
+            timer.textContent = `${Swal.getTimerLeft()}`;
+          }, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log("I was closed by the timer");
+        }
+      });
+      
+    } else {
+      updated.push(singleData);
     }
-    else{
-        updated.push(singleData)
-    }
-    localStorage.setItem('install',JSON.stringify(updated))
-  }
+    localStorage.setItem("install", JSON.stringify(updated));
+  };
 
   return (
     <>
@@ -64,7 +99,13 @@ const AppDetails = () => {
                 <h1 className="text-3xl font-bold">{singleData.reviews}K</h1>
               </div>
             </div>
-            <button onClick={handleInstallation} className="btn my-4 text-xl bg-green-400 text-white">Install ( {singleData.size}MB )</button>
+            <button
+              disabled={disable}
+              onClick={handleInstallation}
+              className="btn my-4 text-xl bg-green-400 text-white"
+            >
+              {disable ? "Installed" : "Install"} ( {singleData.size}MB )
+            </button>
           </div>
         </div>
 
@@ -105,8 +146,8 @@ const AppDetails = () => {
         </div>
 
         <div className="container mx-auto py-20 space-y-6">
-            <h1 className="text-2xl font-semibold">Description</h1>
-            <p className="text-gray-500">{singleData.description}</p>
+          <h1 className="text-2xl font-semibold">Description</h1>
+          <p className="text-gray-500">{singleData.description}</p>
         </div>
       </div>
     </>
