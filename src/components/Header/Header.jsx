@@ -50,6 +50,9 @@ const Header = () => {
             <li>
               <NavLink className="header" to="/apps">Apps</NavLink>
             </li>
+            <li>
+              <NavLink className="header" to="/installation">Installation</NavLink>
+            </li>
           </ul>
         </div>
         <div className="navbar-end">

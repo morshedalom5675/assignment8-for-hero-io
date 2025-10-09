@@ -4,7 +4,7 @@ import App from "../App/App";
 
 const Apps = () => {
   const allData = useLoaderData();
-  console.log(allData);
+  // console.log(allData);
   return (
     <div className="my-20 container mx-auto">
       <h1 className="text-4xl text-center font-bold">Our All Applications</h1>
