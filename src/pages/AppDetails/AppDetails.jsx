@@ -111,7 +111,7 @@ const AppDetails = () => {
 
         {/* chart */}
         <div className="space-y-4 container mx-auto">
-          <h1>App ratings summary</h1>
+          <h1 className="text-2xl font-bold ">App Rating</h1>
           <div className="border rounded-xl h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart

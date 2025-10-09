@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 const ErrorPage = () => {
     return (
          <div className="flex flex-col justify-center items-center h-screen bg-gray-900 text-center px-4">
-      <img src="/error-404.png" alt="error 404" />
+      <img src="../error-404.png" alt="error 404" />
       <h2 className="text-2xl font-semibold text-gray-200 mb-2">
         Oops! Page not found 😢
       </h2>
