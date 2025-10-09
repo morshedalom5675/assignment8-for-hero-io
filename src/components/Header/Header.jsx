@@ -35,6 +35,9 @@ const Header = () => {
               <li>
                 <NavLink to="/apps">Apps</NavLink>
               </li>
+              <li>
+              <NavLink className="header" to="/installation">Installation</NavLink>
+            </li>
             </ul>
           </div>
           <div className="flex items-center gap-2">

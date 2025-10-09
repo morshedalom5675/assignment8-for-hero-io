@@ -66,7 +66,7 @@ const AppDetails = () => {
   return (
     <>
       <div className="bg-gray-100">
-        <div className="flex gap-8 container mx-auto py-20 ">
+        <div className="md:flex p-4 gap-8 container mx-auto py-20 ">
           <div>
             <img
               className="rounded-xl h-80 w-80"
@@ -145,7 +145,7 @@ const AppDetails = () => {
           </div>
         </div>
 
-        <div className="container mx-auto py-20 space-y-6">
+        <div className="container mx-auto py-20 space-y-6 px-4">
           <h1 className="text-2xl font-semibold">Description</h1>
           <p className="text-gray-500">{singleData.description}</p>
         </div>

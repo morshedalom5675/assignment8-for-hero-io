@@ -40,7 +40,7 @@ const Installation = () => {
         <h1 className="text-4xl">Your Installed Apps</h1>
         <p>Explore All Trending Apps on the Market developed by us</p>
       </div>
-      <div className="flex justify-between">
+      <div className="text-center space-y-3 pt-10 md:flex justify-between">
         <p className="text-xl font-bold">
           <span className="text-3xl">Install</span> ({installed.length} Apps)
         </p>
