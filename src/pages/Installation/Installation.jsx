@@ -1,31 +1,38 @@
 import React, { useEffect, useState } from "react";
 import downloadImg from "../../assets/icon-downloads.png";
 import rattingImg from "../../assets/icon-ratings.png";
+import Swal from "sweetalert2";
 
 const Installation = () => {
   const [installed, setInstalled] = useState([]);
-  const [sortOrder,setSortOrder] = useState('none')
+  const [sortOrder, setSortOrder] = useState("none");
   useEffect(() => {
     const installApp = JSON.parse(localStorage.getItem("install"));
     if (installApp) setInstalled(installApp);
   }, []);
 
-  const handleSort =()=>{
-    if(sortOrder === "size-desc"){
-        return [...installed].sort((a,b)=>a.size - b.size)
-    } else if(sortOrder === "size-ase"){
-        return [...installed].sort((a,b)=> b.size-a.size)
-    } else{
-        return installed
+  const handleSort = () => {
+    if (sortOrder === "size-desc") {
+      return [...installed].sort((a, b) => a.size - b.size);
+    } else if (sortOrder === "size-ase") {
+      return [...installed].sort((a, b) => b.size - a.size);
+    } else {
+      return installed;
     }
-  }
+  };
 
   const handleRemove = (id) => {
-    const existingList = JSON.parse(localStorage.getItem('install'))
-    let updateRemove = existingList.filter(p => p.id !== id)
-    setInstalled(updateRemove)
-    localStorage.setItem('install',JSON.stringify(updateRemove))
-  }
+    const existingList = JSON.parse(localStorage.getItem("install"));
+    let updateRemove = existingList.filter((p) => p.id !== id);
+
+    Swal.fire({
+      title: "App Uninstalled",
+      icon: "success",
+      draggable: true,
+    });
+    setInstalled(updateRemove);
+    localStorage.setItem("install", JSON.stringify(updateRemove));
+  };
 
   return (
     <div className="container mx-auto">
@@ -34,13 +41,19 @@ const Installation = () => {
         <p>Explore All Trending Apps on the Market developed by us</p>
       </div>
       <div className="flex justify-between">
-        <p className="text-xl font-bold"><span className="text-3xl">Install</span> ({installed.length}  Apps)</p>
+        <p className="text-xl font-bold">
+          <span className="text-3xl">Install</span> ({installed.length} Apps)
+        </p>
         <label className="form-control w-full max-w-xs">
-            <select className="select select-bordered" value={sortOrder} onChange={e => setSortOrder (e.target.value)}>
+          <select
+            className="select select-bordered"
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+          >
             <option value="none">Sorted by value</option>
             <option value="size-desc">Low-&gt;High</option>
             <option value="size-ase">High-&gt;Low</option>
-        </select>
+          </select>
         </label>
       </div>
       {handleSort().map((appSave) => (
@@ -69,7 +82,12 @@ const Installation = () => {
                 </div>
               </div>
               <div className="card-actions justify-end">
-                <button onClick={()=>handleRemove(appSave.id)} className="btn btn-primary">Uninstall</button>
+                <button
+                  onClick={() => handleRemove(appSave.id)}
+                  className="btn btn-primary"
+                >
+                  Uninstall
+                </button>
               </div>
             </div>
           </div>
