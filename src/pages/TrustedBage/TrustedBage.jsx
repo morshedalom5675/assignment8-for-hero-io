@@ -7,7 +7,7 @@ const TrustedBage = () => {
         <h1 className="text-5xl font-bold text-center justify-center">
           Trusted by Millions, Built for You
         </h1>
-        <div className="flex justify-around gap-6 mt-14">
+        <div className="md:flex space-y-4 justify-around gap-6 mt-14">
           <div>
             <p className="text-sm text-gray-300">Total Download</p>
             <h1 className="text-5xl font-bold py-4">29.9M</h1>
